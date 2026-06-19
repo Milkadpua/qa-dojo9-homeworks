@@ -126,3 +126,91 @@ for (let i = 1; i <= rows; i++) {
   }
   console.log(stars);
 }
+
+//повертає більше з двох чисел тернарний оператор ? :
+function max(a, b) {
+  return a > b ? a : b;
+}
+console.log(max(3, 7)); // 7
+console.log(max(5, 5)); // 5
+console.log(max(10, 2)); // 10
+
+//Напиши функцію `square(n)`, яка повертає квадрат числа
+//Function Declaration
+function square(n) {
+  return n * n;
+}
+//Function Expression
+const square = function (n) {
+  return n * n;
+};
+//Arrow Function
+const square = (n) => n * n;
+
+/*Напиши функцію `capitalize(str)`, яка повертає рядок з великою першою літерою, не змінюючи решту. Порожній рядок повертає порожній рядок. `capitalize("hello")` → `"Hello"` `capitalize("")` → `""`*/
+function capitalize(str) {
+  if (str === '') {
+    return '';
+  }
+  return str[0].toUpperCase() + str.slice(1);
+}
+
+//повертає великі ініціали кожного слова
+function getInitials(fullName) {
+  return fullName
+    .split(' ')
+    .map((word) => word[0].toUpperCase())
+    .join('');
+}
+console.log(getInitials('Pavlo Hrytsenko'));
+
+//Напиши функцію parsePrice(text), яка з рядка типу "$ 15.00"повертає **число**15. Прибери все, крім цифр і крапки. Підказка: text.replace(/[^0-9.]/g, '')прибирає зайві символи, аparseFloat перетворює рядок на число. parsePrice("$ 15.00")→15 parsePrice("$3.50") → 3.5
+function parsePrice(text) {
+  return parseFloat(text.replace(/[^0-9.]/g, ''));
+}
+console.log(parsePrice('$ 15.00')); // 15
+console.log(parsePrice('$3.50')); // 3.5
+console.log(parsePrice('USD 99.99')); // 99.99
+
+//Напиши функцію sumPrices(prices), яка приймає масив чисел і повертає їхню суму. Для порожнього масиву поверни 0.
+function sumPrices(prices) {
+  return prices.reduce((sum, price) => sum + price, 0);
+}
+console.log(sumPrices([1, 2, 3]));
+
+//Напиши функцію sumPrices(prices), яка приймає масив чисел і повертає їхню суму. Для порожнього масиву поверни 0.
+function sumPrices(prices) {
+  return prices.reduce((sum, price) => sum + price, 0);
+}
+//або
+function sumPrices(prices) {
+  let sum = 0;
+
+  prices.forEach((price) => {
+    sum += price;
+  });
+
+  return sum;
+}
+
+//Напиши функцію repeat(action, times), яка викликає передану функцію actionрівноtimes разів.
+function repeat(action, times) {
+  for (let i = 0; i < times; i++) {
+    action();
+  }
+}
+
+//Напиши функцію `runTest(testFn)`, яка викликає передану тест-функцію і повертає `true`, якщо вона **не кинула помилку**, або `false`, якщо помилка сталася. Саме так працює серце будь-якого тест-фреймворку: кинута помилка = провалений тест. Використай `try/catch`. `runTest(() => {})`→`true` `runTest(() => { throw new Error('fail') })`→`false`
+function runTest(testFn) {
+  try {
+    testFn();
+    return true;
+  } catch (error) {
+    return false;
+  }
+}
+console.log(runTest(() => {})); 
+console.log(
+  runTest(() => {
+    throw new Error('fail');
+  });

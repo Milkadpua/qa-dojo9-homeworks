@@ -1,0 +1,695 @@
+{
+  "info": {
+    "_postman_id": "607dd16c-f76b-4b1a-afae-66b78fa5178f",
+    "name": "Platzi Fake Store API  Search",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "39196326"
+  },
+  "item": [
+    {
+      "name": "GetJWTToken",
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"email\": \"john@mail.com\",\n  \"password\": \"changeme\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "https://api.escuelajs.co/api/v1/auth/login",
+          "protocol": "https",
+          "host": ["api", "escuelajs", "co"],
+          "path": ["api", "v1", "auth", "login"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getProductsByTitle",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test(\"Response should be 200\",  () => {",
+              "    pm.response.to.have.status(200);",
+              "})",
+              "",
+              "pm.test(\"Response should be OK\",  () => {",
+              "    pm.response.to.have.status(\"OK\");",
+              "})",
+              "    const json = pm.response.json();    ",
+              "",
+              "pm.test(\"Response should be an array\",  () => {",
+              "    const json = pm.response.json();",
+              "    pm.expect(json).to.be.an('array');",
+              "})",
+              "",
+              "pm.test(\"Content-type header should exist\",  () => {",
+              "    pm.expect(pm.response.headers.get('Content-type')).to.include('application/json');",
+              "    pm.response.to.have.header('Content-type'); ",
+              "})",
+              "",
+              "pm.test('element should have title containing Sleek', () => {",
+              "    const sleekItem = json.find(item => item.title && item.title.includes('Sleek'));",
+              "    pm.expect(sleekItem).to.not.be.undefined;",
+              "    pm.expect(sleekItem.title).to.include('Sleek');",
+              "});",
+              "",
+              "",
+              "pm.test('every element contain title = \"Sleek\"', ()=>{",
+              "  //  for (let i = 0; i < json.length; i++) {",
+              "  //      pm.expect(json[i].title).to.include('Sleek');",
+              "//}",
+              "for (const product of json) {",
+              "    pm.expect(product.title).to.include('Sleek');",
+              "}",
+              "});",
+              "",
+              "pm.test('response time should be less than 1000ms', () => {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "    });",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.escuelajs.co/api/v1/products/?title=Generic",
+          "protocol": "https",
+          "host": ["api", "escuelajs", "co"],
+          "path": ["api", "v1", "products", ""],
+          "query": [
+            {
+              "key": "title",
+              "value": "Generic"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getProductsByPrice",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "",
+              "pm.test(\"Response should be 200\",  () => {",
+              "    pm.response.to.have.status(200);",
+              "})",
+              "",
+              "pm.test(\"Response text is OK\",  () => {",
+              "    pm.response.to.have.status(\"OK\");",
+              "})",
+              " ",
+              "",
+              "pm.test(\"Response should be an array\",  () => {",
+              "    pm.expect(json).to.be.an('array');",
+              "})",
+              "pm.test(\"Response should contain products\", () => {",
+              "    pm.expect(json.length).to.be.above(0);",
+              "});",
+              "",
+              "pm.test(\"Content-type header should exist\",  () => {",
+              "    pm.expect(pm.response.headers.get('Content-type')).to.include('application/json');",
+              "    pm.response.to.have.header('Content-type'); ",
+              "})",
+              "",
+              "pm.test('Every product should contain required field \"price\"', () => {  json.forEach(product => {",
+              "        pm.expect(product).to.have.property(\"price\");",
+              "    });",
+              "});",
+              "",
+              "pm.test(\"All products should have price = 100\", () => {",
+              "    json.forEach(product => {",
+              "        pm.expect(product.price).to.equal(100);",
+              "    });",
+              "});",
+              "",
+              "",
+              "pm.test('response time should be less than 1000ms', () => {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "    });",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [""],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "https://api.escuelajs.co/api/v1/products/?price=100",
+          "protocol": "https",
+          "host": ["api", "escuelajs", "co"],
+          "path": ["api", "v1", "products", ""],
+          "query": [
+            {
+              "key": "price",
+              "value": "100"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getProductsByPriceRange",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "",
+              "pm.test(\"Response should be 200\",  () => {",
+              "    pm.response.to.have.status(200);",
+              "})",
+              "",
+              "pm.test(\"Response text is OK\",  () => {",
+              "    pm.response.to.have.status(\"OK\");",
+              "})",
+              " ",
+              "",
+              "pm.test(\"Response should be an array\",  () => {",
+              "    pm.expect(json).to.be.an('array');",
+              "})",
+              "",
+              "pm.test(\"Content-type header should exist\",  () => {",
+              "    pm.expect(pm.response.headers.get('Content-type')).to.include('application/json');",
+              "    pm.response.to.have.header('Content-type'); ",
+              "})",
+              "",
+              "pm.test('Every product should contain required field \"price\"', () => {  json.forEach(product => {",
+              "        pm.expect(product).to.have.property(\"price\");",
+              "    });",
+              "});",
+              "",
+              "pm.test(\"Response should contain products\", () => {",
+              "    pm.expect(json.length).to.be.above(0);",
+              "});",
+              "",
+              "pm.test(\"All products should have price between 100 and 1000\", () => {",
+              "    json.forEach(product => {",
+              "        pm.expect(product.price).to.be.at.least(100);",
+              "        pm.expect(product.price).to.be.at.most(1000);",
+              "    });",
+              "});",
+              "",
+              "pm.test('response time should be less than 1000ms', () => {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "    });",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [""],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/products/?price_min=100&price_max=1000",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "products", ""],
+          "query": [
+            {
+              "key": "price_min",
+              "value": "100"
+            },
+            {
+              "key": "price_max",
+              "value": "1000"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getProductsCombiningFiltersTitlePriceCategory",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "",
+              "pm.test(\"Response should be 200\",  () => {",
+              "    pm.response.to.have.status(200);",
+              "})",
+              "",
+              "pm.test(\"Response text is OK\",  () => {",
+              "    pm.response.to.have.status(\"OK\");",
+              "})",
+              " ",
+              "",
+              "pm.test(\"Response should be an array\",  () => {",
+              "    pm.expect(json).to.be.an('array');",
+              "})",
+              "",
+              "pm.test(\"Content-type header should exist\",  () => {",
+              "    pm.expect(pm.response.headers.get('Content-type')).to.include('application/json');",
+              "    pm.response.to.have.header('Content-type'); ",
+              "})",
+              "",
+              "pm.test('Every product should contain required field \"price\"', () => {  json.forEach(product => {",
+              "        pm.expect(product).to.have.property(\"price\");",
+              "    });",
+              "});",
+              "",
+              "pm.test(\"Response should contain products\", () => {",
+              "    pm.expect(json.length).to.be.above(0);",
+              "});",
+              "",
+              "pm.test(\"All products should have price between 100 and 1000\", () => {",
+              "    json.forEach(product => {",
+              "        pm.expect(product.price).to.be.at.least(100);",
+              "        pm.expect(product.price).to.be.at.most(1000);",
+              "    });",
+              "});",
+              "",
+              "pm.test('element should have title containing category 1', () => {",
+              "    const categoryItem = json.find(item => item.title && item.category && item.category.id === 1);",
+              "    pm.expect(categoryItem).to.not.be.undefined;",
+              "    pm.expect(categoryItem.category.id).to.equal(1);",
+              "});",
+              "",
+              "pm.test('every element contain title = \"Generic\"', ()=>{",
+              "for (const product of json) {",
+              "    pm.expect(product.title).to.include('Generic');",
+              "}",
+              "});",
+              "pm.test('response time should be less than 1000ms', () => {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "    });",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [""],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/products/?title=Generic&price_min=100&price_max=1000&categoryId=1",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "products", ""],
+          "query": [
+            {
+              "key": "title",
+              "value": "Generic"
+            },
+            {
+              "key": "price_min",
+              "value": "100"
+            },
+            {
+              "key": "price_max",
+              "value": "1000"
+            },
+            {
+              "key": "categoryId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getProductsByPrice0 ?",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "",
+              "pm.test(\"Response should be 200\",  () => {",
+              "    pm.response.to.have.status(200);",
+              "})",
+              "",
+              "pm.test(\"Response text is OK\",  () => {",
+              "    pm.response.to.have.status(\"OK\");",
+              "})",
+              " ",
+              "",
+              "pm.test(\"Response should be an array\",  () => {",
+              "    pm.expect(json).to.be.an('array');",
+              "})",
+              "",
+              "pm.test(\"Content-type header should exist\",  () => {",
+              "    pm.expect(pm.response.headers.get('Content-type')).to.include('application/json');",
+              "    pm.response.to.have.header('Content-type'); ",
+              "})",
+              "",
+              "pm.test('Every product should contain required field \"price\"', () => {  json.forEach(product => {",
+              "        pm.expect(product).to.have.property(\"price\");",
+              "    });",
+              "});",
+              "",
+              "pm.test(\"Response should contain products\", () => {",
+              "    pm.expect(json.length).to.be.above(0);",
+              "});",
+              "",
+              "pm.test(\"All products should have price between 0 and 0\", () => {",
+              "    json.forEach(product => {",
+              "        pm.expect(product.price).to.be.at.least(0);",
+              "        pm.expect(product.price).to.be.at.most(0);",
+              "    });",
+              "});",
+              "",
+              "pm.test('response time should be less than 1000ms', () => {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "    });",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [""],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/products/?price_min=0&price_max=0",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "products", ""],
+          "query": [
+            {
+              "key": "price_min",
+              "value": "0"
+            },
+            {
+              "key": "price_max",
+              "value": "0"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "gettAllproducts",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "",
+              "pm.test(\"Response should be 200\",  () => {",
+              "    pm.response.to.have.status(200);",
+              "})",
+              "",
+              "pm.test(\"Response text is OK\",  () => {",
+              "    pm.response.to.have.status(\"OK\");",
+              "})",
+              " ",
+              "",
+              "pm.test(\"Response should be an array\",  () => {",
+              "    pm.expect(json).to.be.an('array');",
+              "})",
+              "",
+              "pm.test(\"Content-type header should exist\",  () => {",
+              "    pm.expect(pm.response.headers.get('Content-type')).to.include('application/json');",
+              "    pm.response.to.have.header('Content-type'); ",
+              "})",
+              "",
+              "pm.test(\"Response should contain products\", () => {",
+              "    pm.expect(json.length).to.be.above(0);",
+              "});",
+              "",
+              "pm.test(\"Every product should contain required fields\", () => {",
+              "    json.forEach(product => {",
+              "        pm.expect(product).to.have.property(\"id\");",
+              "        pm.expect(product).to.have.property(\"title\");",
+              "        pm.expect(product).to.have.property(\"price\");",
+              "        pm.expect(product).to.have.property(\"category\");",
+              "    });",
+              "});",
+              "",
+              "pm.test('response time should be less than 1000ms', () => {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "    });",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}{/api/v1/products",
+          "host": ["{{baseUrl}}{"],
+          "path": ["api", "v1", "products"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getProductsByCategory",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "",
+              "pm.test(\"Response should be 200\",  () => {",
+              "    pm.response.to.have.status(200);",
+              "})",
+              "",
+              "pm.test(\"Response text is OK\",  () => {",
+              "    pm.response.to.have.status(\"OK\");",
+              "})",
+              " ",
+              "pm.test(\"Response should be an array\",  () => {",
+              "    pm.expect(json).to.be.an('array');",
+              "})",
+              "",
+              "pm.test(\"Content-type header should exist\",  () => {",
+              "    pm.expect(pm.response.headers.get('Content-type')).to.include('application/json');",
+              "    pm.response.to.have.header('Content-type'); ",
+              "})",
+              "",
+              "pm.test(\"Response should contain products\", () => {",
+              "    pm.expect(json.length).to.be.above(0);",
+              "});",
+              "",
+              "pm.test(\"Every product should contain required fields\", () => {",
+              "    json.forEach(product => {",
+              "        pm.expect(product).to.have.property(\"category\");",
+              "    });",
+              "});",
+              "",
+              "",
+              "pm.test('element should have title containing category 1', () => {",
+              "    const categoryItem = json.find(item => item.title && item.category && item.category.id === 1);",
+              "    pm.expect(categoryItem).to.not.be.undefined;",
+              "    pm.expect(categoryItem.category.id).to.equal(1);",
+              "});",
+              "",
+              "",
+              "pm.test('response time should be less than 1000ms', () => {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "    });"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}{api/v1/products/?categoryId=1",
+          "host": ["{{baseUrl}}{api"],
+          "path": ["v1", "products", ""],
+          "query": [
+            {
+              "key": "categoryId",
+              "value": "1"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "getProductsByCategorySlug",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "const json = pm.response.json();",
+              "",
+              "pm.test(\"Response should be 200\",  () => {",
+              "    pm.response.to.have.status(200);",
+              "})",
+              "",
+              "pm.test(\"Response text is OK\",  () => {",
+              "    pm.response.to.have.status(\"OK\");",
+              "})",
+              " ",
+              "pm.test(\"Response should be an array\",  () => {",
+              "    pm.expect(json).to.be.an('array');",
+              "})",
+              "",
+              "pm.test(\"Content-type header should exist\",  () => {",
+              "    pm.expect(pm.response.headers.get('Content-type')).to.include('application/json');",
+              "    pm.response.to.have.header('Content-type'); ",
+              "})",
+              "",
+              "pm.test(\"Response should contain products\", () => {",
+              "    pm.expect(json.length).to.be.above(0);",
+              "});",
+              "",
+              "pm.test(\"Every product should contain required fields\", () => {",
+              "    json.forEach(product => {",
+              "        pm.expect(product).to.have.property(\"category\");",
+              "    });",
+              "});",
+              "",
+              "",
+              "pm.test('every element should have category slug updated-category-name', () => {",
+              "    json.forEach(item => {",
+              "        pm.expect(item.category.slug)",
+              "            .to.equal('updated-category-name');",
+              "    });",
+              "});",
+              "",
+              "pm.test('response time should be less than 1000ms', () => {",
+              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+              "    });"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseUrl}}/api/v1/products/?categorySlug=updated-category-name",
+          "host": ["{{baseUrl}}"],
+          "path": ["api", "v1", "products", ""],
+          "query": [
+            {
+              "key": "categorySlug",
+              "value": "updated-category-name"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOjEsImlhdCI6MTc4MTI4MzA5NCwiZXhwIjoxNzgzMDExMDk0fQ.wFLDCweWRShdaBCldRbFnNKQCCFDl1ZYdVKOOO7RSVc",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [""]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [""]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.escuelajs.co/"
+    }
+  ]
+}

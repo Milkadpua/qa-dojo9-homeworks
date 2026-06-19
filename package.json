@@ -1,0 +1,23 @@
+{
+  "name": "qa-dojo-9-practice",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Milkadpua/qa-dojo9-homeworks.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Milkadpua/qa-dojo9-homeworks/issues"
+  },
+  "homepage": "https://github.com/Milkadpua/qa-dojo9-homeworks#readme",
+  "dependencies": {
+    "newman": "^6.2.2",
+    "reporter": "^0.1.0"
+  }
+}
