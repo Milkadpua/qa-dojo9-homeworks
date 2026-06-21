@@ -26,6 +26,7 @@ jobs:
               run: |
                   mkdir -p newman
                   newman run postmanTests/platzi-postman-collection.json \
+                  --env-var baseUrl=https://api.escuelajs.co \
                     -r cli,htmlextra \
                     --reporter-htmlextra-export newman/report.html
 
