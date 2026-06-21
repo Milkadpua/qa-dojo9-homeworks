@@ -17,7 +17,7 @@ jobs:
                   npm install -g newman
                   npm install -g newman-reporter-htmlextra
             - name: Run Newman tests
-              run: newman run postmanTests/platzi-postman-collection.json -r htmlextra
+              run: newman run postmanTests/platzi-postman-collection.json -r cli,htmlextra
             - uses: actions/upload-artifact@v4
               if: ${{ !cancelled() }}
               with:
