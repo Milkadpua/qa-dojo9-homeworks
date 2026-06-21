@@ -12,7 +12,7 @@ playwright/.cache/
 
 storageState.json
 *.storageState.json
-
+newman
 .vscode/
 .idea/
 .npm/

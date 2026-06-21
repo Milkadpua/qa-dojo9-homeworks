@@ -21,10 +21,15 @@
           }
         },
         "url": {
-          "raw": "https://api.escuelajs.co/api/v1/auth/login",
-          "protocol": "https",
-          "host": ["api", "escuelajs", "co"],
-          "path": ["api", "v1", "auth", "login"]
+          "raw": "{{baseUrl}}api/v1/auth/login",
+          "host": [
+            "{{baseUrl}}api"
+          ],
+          "path": [
+            "v1",
+            "auth",
+            "login"
+          ]
         }
       },
       "response": []
@@ -36,14 +41,7 @@
           "listen": "test",
           "script": {
             "exec": [
-              "pm.test(\"Response should be 200\",  () => {",
-              "    pm.response.to.have.status(200);",
-              "})",
-              "",
-              "pm.test(\"Response should be OK\",  () => {",
-              "    pm.response.to.have.status(\"OK\");",
-              "})",
-              "    const json = pm.response.json();    ",
+              " const json = pm.response.json();    ",
               "",
               "pm.test(\"Response should be an array\",  () => {",
               "    const json = pm.response.json();",
@@ -55,25 +53,34 @@
               "    pm.response.to.have.header('Content-type'); ",
               "})",
               "",
-              "pm.test('element should have title containing Sleek', () => {",
-              "    const sleekItem = json.find(item => item.title && item.title.includes('Sleek'));",
+              "pm.test('element should have title containing Generic', () => {",
+              "    const sleekItem = json.find(item => item.title && item.title.includes('Generic'));",
               "    pm.expect(sleekItem).to.not.be.undefined;",
-              "    pm.expect(sleekItem.title).to.include('Sleek');",
+              "    pm.expect(sleekItem.title).to.include('Generic');",
               "});",
               "",
               "",
-              "pm.test('every element contain title = \"Sleek\"', ()=>{",
+              "pm.test('every element contain title = \"Generic\"', ()=>{",
               "  //  for (let i = 0; i < json.length; i++) {",
               "  //      pm.expect(json[i].title).to.include('Sleek');",
               "//}",
               "for (const product of json) {",
-              "    pm.expect(product.title).to.include('Sleek');",
+              "    pm.expect(product.title).to.include('Generic');",
               "}",
               "});",
               "",
-              "pm.test('response time should be less than 1000ms', () => {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "    });",
+              "",
+              ""
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
               ""
             ],
             "type": "text/javascript",
@@ -86,10 +93,15 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "https://api.escuelajs.co/api/v1/products/?title=Generic",
-          "protocol": "https",
-          "host": ["api", "escuelajs", "co"],
-          "path": ["api", "v1", "products", ""],
+          "raw": "{{baseUrl}}api/v1/products/?title=Generic",
+          "host": [
+            "{{baseUrl}}api"
+          ],
+          "path": [
+            "v1",
+            "products",
+            ""
+          ],
           "query": [
             {
               "key": "title",
@@ -108,15 +120,6 @@
           "script": {
             "exec": [
               "const json = pm.response.json();",
-              "",
-              "pm.test(\"Response should be 200\",  () => {",
-              "    pm.response.to.have.status(200);",
-              "})",
-              "",
-              "pm.test(\"Response text is OK\",  () => {",
-              "    pm.response.to.have.status(\"OK\");",
-              "})",
-              " ",
               "",
               "pm.test(\"Response should be an array\",  () => {",
               "    pm.expect(json).to.be.an('array');",
@@ -142,9 +145,6 @@
               "});",
               "",
               "",
-              "pm.test('response time should be less than 1000ms', () => {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "    });",
               ""
             ],
             "type": "text/javascript",
@@ -155,7 +155,9 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [""],
+            "exec": [
+              ""
+            ],
             "type": "text/javascript",
             "packages": {},
             "requests": {}
@@ -166,10 +168,15 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "https://api.escuelajs.co/api/v1/products/?price=100",
-          "protocol": "https",
-          "host": ["api", "escuelajs", "co"],
-          "path": ["api", "v1", "products", ""],
+          "raw": "{{baseUrl}}api/v1/products/?price=100",
+          "host": [
+            "{{baseUrl}}api"
+          ],
+          "path": [
+            "v1",
+            "products",
+            ""
+          ],
           "query": [
             {
               "key": "price",
@@ -188,15 +195,6 @@
           "script": {
             "exec": [
               "const json = pm.response.json();",
-              "",
-              "pm.test(\"Response should be 200\",  () => {",
-              "    pm.response.to.have.status(200);",
-              "})",
-              "",
-              "pm.test(\"Response text is OK\",  () => {",
-              "    pm.response.to.have.status(\"OK\");",
-              "})",
-              " ",
               "",
               "pm.test(\"Response should be an array\",  () => {",
               "    pm.expect(json).to.be.an('array');",
@@ -223,9 +221,6 @@
               "    });",
               "});",
               "",
-              "pm.test('response time should be less than 1000ms', () => {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "    });",
               ""
             ],
             "type": "text/javascript",
@@ -236,7 +231,9 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [""],
+            "exec": [
+              ""
+            ],
             "type": "text/javascript",
             "packages": {},
             "requests": {}
@@ -247,9 +244,15 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/api/v1/products/?price_min=100&price_max=1000",
-          "host": ["{{baseUrl}}"],
-          "path": ["api", "v1", "products", ""],
+          "raw": "{{baseUrl}}api/v1/products/?price_min=100&price_max=1000",
+          "host": [
+            "{{baseUrl}}api"
+          ],
+          "path": [
+            "v1",
+            "products",
+            ""
+          ],
           "query": [
             {
               "key": "price_min",
@@ -273,15 +276,6 @@
             "exec": [
               "const json = pm.response.json();",
               "",
-              "pm.test(\"Response should be 200\",  () => {",
-              "    pm.response.to.have.status(200);",
-              "})",
-              "",
-              "pm.test(\"Response text is OK\",  () => {",
-              "    pm.response.to.have.status(\"OK\");",
-              "})",
-              " ",
-              "",
               "pm.test(\"Response should be an array\",  () => {",
               "    pm.expect(json).to.be.an('array');",
               "})",
@@ -300,9 +294,9 @@
               "    pm.expect(json.length).to.be.above(0);",
               "});",
               "",
-              "pm.test(\"All products should have price between 100 and 1000\", () => {",
+              "pm.test(\"All products should have price between 10 and 1000\", () => {",
               "    json.forEach(product => {",
-              "        pm.expect(product.price).to.be.at.least(100);",
+              "        pm.expect(product.price).to.be.at.least(10);",
               "        pm.expect(product.price).to.be.at.most(1000);",
               "    });",
               "});",
@@ -318,9 +312,6 @@
               "    pm.expect(product.title).to.include('Generic');",
               "}",
               "});",
-              "pm.test('response time should be less than 1000ms', () => {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "    });",
               ""
             ],
             "type": "text/javascript",
@@ -331,7 +322,9 @@
         {
           "listen": "prerequest",
           "script": {
-            "exec": [""],
+            "exec": [
+              ""
+            ],
             "type": "text/javascript",
             "packages": {},
             "requests": {}
@@ -342,9 +335,15 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/api/v1/products/?title=Generic&price_min=100&price_max=1000&categoryId=1",
-          "host": ["{{baseUrl}}"],
-          "path": ["api", "v1", "products", ""],
+          "raw": "{{baseUrl}}api/v1/products/?title=Generic&price_min=10&price_max=1000&categoryId=1",
+          "host": [
+            "{{baseUrl}}api"
+          ],
+          "path": [
+            "v1",
+            "products",
+            ""
+          ],
           "query": [
             {
               "key": "title",
@@ -352,7 +351,7 @@
             },
             {
               "key": "price_min",
-              "value": "100"
+              "value": "10"
             },
             {
               "key": "price_max",
@@ -368,90 +367,6 @@
       "response": []
     },
     {
-      "name": "getProductsByPrice0 ?",
-      "event": [
-        {
-          "listen": "test",
-          "script": {
-            "exec": [
-              "const json = pm.response.json();",
-              "",
-              "pm.test(\"Response should be 200\",  () => {",
-              "    pm.response.to.have.status(200);",
-              "})",
-              "",
-              "pm.test(\"Response text is OK\",  () => {",
-              "    pm.response.to.have.status(\"OK\");",
-              "})",
-              " ",
-              "",
-              "pm.test(\"Response should be an array\",  () => {",
-              "    pm.expect(json).to.be.an('array');",
-              "})",
-              "",
-              "pm.test(\"Content-type header should exist\",  () => {",
-              "    pm.expect(pm.response.headers.get('Content-type')).to.include('application/json');",
-              "    pm.response.to.have.header('Content-type'); ",
-              "})",
-              "",
-              "pm.test('Every product should contain required field \"price\"', () => {  json.forEach(product => {",
-              "        pm.expect(product).to.have.property(\"price\");",
-              "    });",
-              "});",
-              "",
-              "pm.test(\"Response should contain products\", () => {",
-              "    pm.expect(json.length).to.be.above(0);",
-              "});",
-              "",
-              "pm.test(\"All products should have price between 0 and 0\", () => {",
-              "    json.forEach(product => {",
-              "        pm.expect(product.price).to.be.at.least(0);",
-              "        pm.expect(product.price).to.be.at.most(0);",
-              "    });",
-              "});",
-              "",
-              "pm.test('response time should be less than 1000ms', () => {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "    });",
-              ""
-            ],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        },
-        {
-          "listen": "prerequest",
-          "script": {
-            "exec": [""],
-            "type": "text/javascript",
-            "packages": {},
-            "requests": {}
-          }
-        }
-      ],
-      "request": {
-        "method": "GET",
-        "header": [],
-        "url": {
-          "raw": "{{baseUrl}}/api/v1/products/?price_min=0&price_max=0",
-          "host": ["{{baseUrl}}"],
-          "path": ["api", "v1", "products", ""],
-          "query": [
-            {
-              "key": "price_min",
-              "value": "0"
-            },
-            {
-              "key": "price_max",
-              "value": "0"
-            }
-          ]
-        }
-      },
-      "response": []
-    },
-    {
       "name": "gettAllproducts",
       "event": [
         {
@@ -459,15 +374,6 @@
           "script": {
             "exec": [
               "const json = pm.response.json();",
-              "",
-              "pm.test(\"Response should be 200\",  () => {",
-              "    pm.response.to.have.status(200);",
-              "})",
-              "",
-              "pm.test(\"Response text is OK\",  () => {",
-              "    pm.response.to.have.status(\"OK\");",
-              "})",
-              " ",
               "",
               "pm.test(\"Response should be an array\",  () => {",
               "    pm.expect(json).to.be.an('array');",
@@ -490,10 +396,6 @@
               "        pm.expect(product).to.have.property(\"category\");",
               "    });",
               "});",
-              "",
-              "pm.test('response time should be less than 1000ms', () => {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "    });",
               ""
             ],
             "type": "text/javascript",
@@ -506,9 +408,14 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}{/api/v1/products",
-          "host": ["{{baseUrl}}{"],
-          "path": ["api", "v1", "products"]
+          "raw": "{{baseUrl}}api/v1/products",
+          "host": [
+            "{{baseUrl}}api"
+          ],
+          "path": [
+            "v1",
+            "products"
+          ]
         }
       },
       "response": []
@@ -521,14 +428,6 @@
           "script": {
             "exec": [
               "const json = pm.response.json();",
-              "",
-              "pm.test(\"Response should be 200\",  () => {",
-              "    pm.response.to.have.status(200);",
-              "})",
-              "",
-              "pm.test(\"Response text is OK\",  () => {",
-              "    pm.response.to.have.status(\"OK\");",
-              "})",
               " ",
               "pm.test(\"Response should be an array\",  () => {",
               "    pm.expect(json).to.be.an('array');",
@@ -556,10 +455,7 @@
               "    pm.expect(categoryItem.category.id).to.equal(1);",
               "});",
               "",
-              "",
-              "pm.test('response time should be less than 1000ms', () => {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "    });"
+              ""
             ],
             "type": "text/javascript",
             "packages": {},
@@ -571,9 +467,15 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}{api/v1/products/?categoryId=1",
-          "host": ["{{baseUrl}}{api"],
-          "path": ["v1", "products", ""],
+          "raw": "{{baseUrl}}api/v1/products/?categoryId=1",
+          "host": [
+            "{{baseUrl}}api"
+          ],
+          "path": [
+            "v1",
+            "products",
+            ""
+          ],
           "query": [
             {
               "key": "categoryId",
@@ -592,14 +494,6 @@
           "script": {
             "exec": [
               "const json = pm.response.json();",
-              "",
-              "pm.test(\"Response should be 200\",  () => {",
-              "    pm.response.to.have.status(200);",
-              "})",
-              "",
-              "pm.test(\"Response text is OK\",  () => {",
-              "    pm.response.to.have.status(\"OK\");",
-              "})",
               " ",
               "pm.test(\"Response should be an array\",  () => {",
               "    pm.expect(json).to.be.an('array');",
@@ -621,16 +515,12 @@
               "});",
               "",
               "",
-              "pm.test('every element should have category slug updated-category-name', () => {",
-              "    json.forEach(item => {",
-              "        pm.expect(item.category.slug)",
-              "            .to.equal('updated-category-name');",
-              "    });",
-              "});",
-              "",
-              "pm.test('response time should be less than 1000ms', () => {",
-              "    pm.expect(pm.response.responseTime).to.be.below(1000);",
-              "    });"
+              "pm.test('every element should have category slug - clothes', () => {",
+              " json.forEach(item => {",
+              "    pm.expect(item.category.slug)",
+              "        .to.equal('clothes');",
+              "            });",
+              "});"
             ],
             "type": "text/javascript",
             "packages": {},
@@ -642,13 +532,19 @@
         "method": "GET",
         "header": [],
         "url": {
-          "raw": "{{baseUrl}}/api/v1/products/?categorySlug=updated-category-name",
-          "host": ["{{baseUrl}}"],
-          "path": ["api", "v1", "products", ""],
+          "raw": "{{baseUrl}}api/v1/products/?categorySlug=clothes",
+          "host": [
+            "{{baseUrl}}api"
+          ],
+          "path": [
+            "v1",
+            "products",
+            ""
+          ],
           "query": [
             {
               "key": "categorySlug",
-              "value": "updated-category-name"
+              "value": "clothes"
             }
           ]
         }
@@ -673,7 +569,9 @@
         "type": "text/javascript",
         "packages": {},
         "requests": {},
-        "exec": [""]
+        "exec": [
+          ""
+        ]
       }
     },
     {
@@ -682,14 +580,25 @@
         "type": "text/javascript",
         "packages": {},
         "requests": {},
-        "exec": [""]
+        "exec": [
+          "pm.test(\"Response should be 200\",  () => {",
+          "    pm.response.to.have.status(200);",
+          "})",
+          "",
+          "pm.test(\"Response should be OK\",  () => {",
+          "    pm.response.to.have.status(\"OK\");",
+          "})",
+          "pm.test('response time should be less than 1000ms', () => {",
+          "    pm.expect(pm.response.responseTime).to.be.below(1000);",
+          "    });"
+        ]
       }
     }
   ],
   "variable": [
     {
       "key": "baseUrl",
-      "value": "https://api.escuelajs.co/"
+      "value": ""
     }
   ]
 }
