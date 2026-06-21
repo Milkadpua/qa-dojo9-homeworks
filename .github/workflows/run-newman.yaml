@@ -3,11 +3,13 @@ name: Run Newman tests
 on:
     workflow_dispatch:
 
+env:
+    FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
     api-testing:
         timeout-minutes: 2
         runs-on: ubuntu-latest
-
         steps:
             - uses: actions/checkout@v5
 
