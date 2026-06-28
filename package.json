@@ -3,9 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Milkadpua/qa-dojo9-homeworks.git"
@@ -18,5 +16,9 @@
   "homepage": "https://github.com/Milkadpua/qa-dojo9-homeworks#readme",
   "dependencies": {
     "reporter": "^0.1.0"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.0.1"
   }
 }
