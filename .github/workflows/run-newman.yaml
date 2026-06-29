@@ -1,6 +1,8 @@
 name: Run Newman tests
 
 on:
+    push:
+        branches: [main]
     workflow_dispatch:
 
 env:

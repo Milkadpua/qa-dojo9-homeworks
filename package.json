@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test": "newman run platzi-postman-collection.json"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Milkadpua/qa-dojo9-homeworks.git"
